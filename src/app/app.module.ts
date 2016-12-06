@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, forwardRef } from '@angular/core';
+import {UpgradeAdapter} from '@angular/upgrade';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
@@ -8,12 +9,15 @@ import { HelloWorldComponent } from './hello-world/hello-world.component';
 import { UserItemComponent } from './user-item/user-item.component';
 import { UserListComponent } from './user-list/user-list.component';
 
+var myCompilerOptions = {};
+var adapter = new UpgradeAdapter(forwardRef(() => AppModule), myCompilerOptions);
+
 @NgModule({
   declarations: [
     AppComponent,
     HelloWorldComponent,
     UserItemComponent,
-    UserListComponent
+    UserListComponent //, adapter.upgradeNg1Component('ng1Hello')
   ],
   imports: [
     BrowserModule,
